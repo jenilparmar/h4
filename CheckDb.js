@@ -37,3 +37,7 @@ async function checkDb(nameOfDB) {
   const res = await checkDb("Scrapped");
   console.log(res);
 })();
+
+
+
+module.exports = checkDb;

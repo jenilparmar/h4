@@ -1,7 +1,11 @@
 const { MongoClient } = require("mongodb");
+const { ObjectId } = require("mongodb");
+
 const uri = "mongodb://localhost:27017/";
-const client = new MongoClient(uri);
+
 async function readConditionData(nameOfDB, nameOfCollection, atrs) {
+  const client = new MongoClient(uri);
+  
   try {
     // Connect to the database
     await client.connect();
@@ -68,14 +72,58 @@ async function readConditionData(nameOfDB, nameOfCollection, atrs) {
   }
 }
 
-// Usage example
+async function updateData(nameOfDB, nameOfCollection, atrs, changeAtrs) {
+  const client = new MongoClient(uri);
+
+    
+  try {
+    // Connect to MongoDB
+    await client.connect();
+    const database = client.db(nameOfDB);
+    const collection = database.collection(nameOfCollection);
+
+    // Get data to update based on conditions
+    const dataToUpdate = await readConditionData(nameOfDB, nameOfCollection, atrs);
+    const response = [];
+
+    
+    // Iterate over the database and check if the _id matches
+    for (const data of dataToUpdate) {
+        
+        // Assuming the data contains _id as an ObjectId
+        const filter = { _id:(new ObjectId(data._id)) }; // Convert string _id to ObjectId
+        
+
+      // Update the specific field in the database
+      const update = { $set: { [changeAtrs['field']]: changeAtrs['value'] } };
+
+      // Perform the update operation
+      const result = await collection.updateOne(filter, update);
+      response.push(result);
+    }
+
+    // Return the update results
+    return `${response.length} data affected!`;
+  } catch (error) {
+    console.error("Error updating data:", error);
+    return [];
+  } finally {
+    // Ensure the client is closed
+    await client.close();
+  }
+}
+
+// Usage Example
 (async () => {
-  // Define filtering criteria
-  const filters = [
-    { field: "age", operator: "==", value:20 },
+  const atrs = [
+    { field: "age", operator: "<", value: 100 },
   ];
 
-  const res = await readConditionData("jenil", "pamrar", filters);
-  console.log(res);
+  const changeAtrs = {
+    field: "name",
+    value: "hogaya",
+  };
+
+  const results = await updateData("jenil", "pamrar", atrs, changeAtrs);
+  console.log(results); // Logs the results of the update operations
 })();
-module.exports = readConditionData;
