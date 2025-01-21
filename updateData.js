@@ -2,7 +2,23 @@ const { MongoClient } = require("mongodb");
 const { ObjectId } = require("mongodb");
 
 const uri = "mongodb://localhost:27017/";
-
+const disc = [
+  "Verify if documents in the collection match specified filter conditions and update relevant fields.",
+  "Filter documents based on dynamic conditions and apply field updates based on specific rules.",
+  "Search MongoDB collection for documents that meet certain conditions and modify a selected field in matching records.",
+  "Retrieve documents that satisfy given conditions (like age less than 100) and change one of their fields (e.g., name).",
+  "Use conditional filtering to gather documents from MongoDB and then update a specified field.",
+  "Update MongoDB documents by applying conditions on fields and modifying specific attributes based on input parameters.",
+  "Check if documents meet dynamic conditions (e.g., comparing values, ranges, arrays) and update them accordingly.",
+  "Implement an update operation that searches for documents using filters and modifies specific field values in the result.",
+  "Apply filters to documents in a collection and perform updates to selected fields based on those filters.",
+  "Use dynamic filters to select MongoDB documents, then perform an update operation to modify one or more attributes of those documents.",
+  "Perform a conditional search operation in MongoDB, retrieving matching documents and updating their fields based on certain criteria.",
+  "Use logical operators to filter and find documents, then update specified fields with new values if conditions are met.",
+  "Retrieve MongoDB documents that match multiple conditions (like age comparisons) and update certain fields accordingly.",
+  "Match documents in MongoDB collection using conditions and modify selected fields by setting new values.",
+  "Perform an update operation on documents by first applying dynamic conditions to filter the data and then changing specific field values."
+]
 async function readConditionData(nameOfDB, nameOfCollection, atrs) {
   const client = new MongoClient(uri);
   

@@ -4,6 +4,23 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/";
 
 const client = new MongoClient(uri);
+const disc = [
+  "Verify if a specified database is available in the MongoDB server.",
+  "Determine the presence of a particular database by querying the list of databases.",
+  "Check the status of the database and return a boolean indicating its existence.",
+  "Use MongoDB's admin interface to list all available databases and confirm the requested one.",
+  "Log the result of the database check, specifying whether the database exists or not.",
+  "Handle any potential errors or exceptions that arise during the database connection and check.",
+  "Ensure that the MongoDB client closes gracefully after checking the database's existence.",
+  "Search the server’s database list to see if the database of interest is currently available.",
+  "Perform an asynchronous check to find out if the target database exists within the MongoDB system.",
+  "Query MongoDB for the list of databases, comparing it against the requested database name.",
+  "Return a status message indicating whether the desired database exists or is absent.",
+  "Automatically disconnect the MongoDB client after the operation to free up resources.",
+  "Optimize the connection by using the MongoDB admin interface to get database details efficiently.",
+  "Error-proof the operation by adding proper try-catch handling for failed database checks.",
+  "Create a reusable function to check the existence of any database, simplifying future operations."
+]
 
 
 async function checkDb(nameOfDB) {
