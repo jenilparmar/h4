@@ -5,6 +5,7 @@ const uri = "mongodb://localhost:27017/";
 
 const client = new MongoClient(uri);
 
+
 async function checkDb(nameOfDB) {
   try {
     // Connect the client to the server
