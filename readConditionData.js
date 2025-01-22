@@ -21,24 +21,22 @@ const disc = [
 
 async function readConditionData(nameOfDB, nameOfCollection, atrs) {
   try {
-    // Connect to the database
+
     await client.connect();
 
-    // Get database and collection references
+    
     const database = client.db(nameOfDB);
     const collection = database.collection(nameOfCollection);
 
-    // Fetch all documents
+
     const res = await collection.find({}).toArray();
 
-    // Use a Set to ensure uniqueness
     const uniqueResults = new Set();
 
-    // Apply filters dynamically
     const response = res.filter((doc) => {
       const matches = atrs.every(({ field, operator, value }) => {
         if (Array.isArray(value)) {
-          // Handle array of values (like `$in` in MongoDB)
+   
           if (operator === "==") {
             return value.includes(doc[field]);
           } else if (operator === "!=") {
